@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcería Lisset - Cakes y Postres</title>
+    <meta name="description" content="Dulcería Lisset - Creamos cakes y postres exquisitos para tus celebraciones especiales. Calidad, sabor y diseño en cada creación.">
+    <link rel="icon" type="image/x-icon" href="logo.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header compacto */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        
+        .logo h1 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        
+        nav a:hover,
+        nav a:focus {
+            color: #3498db;
+            background-color: #f8f9fa;
+            outline: none;
+        }
+        
+        /* Hero compacto */
+        .hero {
+            background-color: #e9ecef;
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 20px;
+        }
+        
+        .hero h2 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto 15px;
+            color: #495057;
+        }
+        
+        /* Secciones compactas */
+        .section-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .gallery-section, .price-list, .order-system, .location {
+            background-color: #ffffff;
+            padding: 30px 0;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+        
+        /* Galería optimizada */
+        .gallery-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: transform 0.2s;
+            background-color: #f8f9fa;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item:focus {
+            outline: 2px solid #3498db;
+            outline-offset: 2px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Modal para imagen ampliada */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            line-height: 1;
+        }
+        
+        /* Lista de precios compacta */
+        .category {
+            margin-bottom: 20px;
+        }
+        
+        .category h3 {
+            color: #3498db;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            padding-left: 8px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .item-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .item {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .item-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+        
+        .item-price {
+            font-weight: 700;
+            color: #e74c3c;
+            font-size: 1rem;
+        }
+        
+        .item-description {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+        
+        .sub-item {
+            margin-left: 15px;
+            margin-top: 8px;
+            padding-left: 12px;
+            border-left: 2px solid #dee2e6;
+        }
+        
+        /* Sistema de pedidos compacto */
+        .order-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background-color: #fff;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: 2px solid #3498db;
+            border-color: #3498db;
+        }
+        
+        .selected-items {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #dee2e6;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .selected-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn:hover,
+        .btn:focus {
+            background-color: #2980b9;
+            outline: none;
+        }
+        
+        .btn-add {
+            background-color: #2ecc71;
+            padding: 8px 15px;
+            margin-left: 8px;
+            width: auto;
+        }
+        
+        .btn-add:hover,
+        .btn-add:focus {
+            background-color: #27ae60;
+        }
+        
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 5px;
+            line-height: 1;
+        }
+        
+        /* Ubicación compacta */
+        .location-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .location-info h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .address {
+            margin-bottom: 15px;
+        }
+        
+        .phone-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+        
+        .map-placeholder {
+            height: 200px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .header-content {
+                padding: 8px 0;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero {
+                padding: 30px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .gallery-item img {
+                height: 150px;
+            }
+            
+            .item-list {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .form-row {
+                display: flex;
+                gap: 15px;
+            }
+            
+            .form-row .form-group {
+                flex: 1;
+            }
+            
+            .btn {
+                min-width: 180px;
+            }
+            
+            .location-content {
+                flex-direction: row;
+            }
+            
+            .location-info, .map-placeholder {
+                flex: 1;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 12px;
+            }
+            
+            .gallery-item img {
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+            
+            .gallery-item img {
+                height: 110px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px; /* Previene zoom en iOS */
+            }
+        }
+        
+        /* Mejoras de accesibilidad */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus visible mejorado */
+        :focus-visible {
+            outline: 2px solid #3498db;
+            outline-offset: 2px;
+        }
+        
+        /* Mejoras de rendimiento */
+        .gallery-item img {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#inicio" class="logo">
+                <img src="logo.jpg" alt="Logo Dulcería Lisset" class="logo-img">
+                <h1>Dulcería Lisset</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a href="#pedidos">Pedidos</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h2>Dulces Momentos, Deliciosos Recuerdos</h2>
+            <p>En Dulcería Lisset creamos cakes y postres exquisitos para tus celebraciones especiales. Calidad, sabor y diseño en cada creación.</p>
+            <a href="#pedidos" class="btn">Realizar Pedido</a>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Nuestra Galería</h2>
+            <p class="gallery-description">Descubre nuestras creaciones más recientes. Haz clic en cualquier imagen para ampliarla.</p>
+            
+            <div class="gallery">
+                <!-- Imágenes actualizadas -->
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 1">
+                    <img src="https://i.ibb.co/TMKy0ZDs/IMG-20251206-WA0006.jpg" alt="Cake decorado 1" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 2">
+                    <img src="https://i.ibb.co/bgyccjLF/IMG-20251206-WA0007.jpg" alt="Cake decorado 2" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 3">
+                    <img src="https://i.ibb.co/fVBq8NdK/IMG-20251206-WA0008.jpg" alt="Cake decorado 3" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 4">
+                    <img src="https://i.ibb.co/wZ1fF3Qj/IMG-20251206-WA0009.jpg" alt="Cake decorado 4" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 5">
+                    <img src="https://i.ibb.co/39ndkJGr/IMG-20251206-WA0010.jpg" alt="Cake decorado 5" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 6">
+                    <img src="https://i.ibb.co/HTtmd5S5/IMG-20251206-WA0011.jpg" alt="Cake decorado 6" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 7">
+                    <img src="https://i.ibb.co/RkxDdSSq/IMG-20251206-WA0012.jpg" alt="Cake decorado 7" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 8">
+                    <img src="https://i.ibb.co/hRCphsXX/IMG-20251206-WA0013.jpg" alt="Cake decorado 8" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 9">
+                    <img src="https://i.ibb.co/Mxh1n8X7/IMG-20251206-WA0014.jpg" alt="Cake decorado 9" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 10">
+                    <img src="https://i.ibb.co/n8sRfMVK/IMG-20251206-WA0015.jpg" alt="Cake decorado 10" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 11">
+                    <img src="https://i.ibb.co/Y7g6xvtP/IMG-20251206-WA0016.jpg" alt="Cake decorado 11" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 12">
+                    <img src="https://i.ibb.co/ds4nJYRg/IMG-20251206-WA0017.jpg" alt="Cake decorado 12" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 13">
+                    <img src="https://i.ibb.co/RTHQ71Rc/IMG-20251206-WA0018.jpg" alt="Cake decorado 13" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 14">
+                    <img src="https://i.ibb.co/4RG3KTPB/IMG-20251206-WA0019.jpg" alt="Cake decorado 14" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 15">
+                    <img src="https://i.ibb.co/ymQSR4HT/IMG-20251206-WA0020.jpg" alt="Cake decorado 15" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 16">
+                    <img src="https://i.ibb.co/d06vK4pC/IMG-20251206-WA0021.jpg" alt="Cake decorado 16" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 17">
+                    <img src="https://i.ibb.co/7Nt5F7Gt/IMG-20251206-WA0022.jpg" alt="Cake decorado 17" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 18">
+                    <img src="https://i.ibb.co/F4CF0dRG/IMG-20251206-WA0023.jpg" alt="Cake decorado 18" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 19">
+                    <img src="https://i.ibb.co/HLK3f9kL/IMG-20251206-WA0024.jpg" alt="Cake decorado 19" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 20">
+                    <img src="https://i.ibb.co/Pz9XGbvF/IMG-20251206-WA0025.jpg" alt="Cake decorado 20" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 21">
+                    <img src="https://i.ibb.co/NdkTfRvX/IMG-20251206-WA0026.jpg" alt="Cake decorado 21" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 22">
+                    <img src="https://i.ibb.co/Z6sjjGhT/IMG-20251206-WA0027.jpg" alt="Cake decorado 22" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 23">
+                    <img src="https://i.ibb.co/rR3yzTfX/IMG-20251206-WA0028.jpg" alt="Cake decorado 23" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 24">
+                    <img src="https://i.ibb.co/B5mCjDkj/IMG-20251206-WA0029.jpg" alt="Cake decorado 24" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 25">
+                    <img src="https://i.ibb.co/7JnXbnT4/IMG-20251206-WA0030.jpg" alt="Cake decorado 25" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 26">
+                    <img src="https://i.ibb.co/4wb39wMf/IMG-20251206-WA0031.jpg" alt="Cake decorado 26" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 27">
+                    <img src="https://i.ibb.co/cc24XfxH/IMG-20251206-WA0032.jpg" alt="Cake decorado 27" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 28">
+                    <img src="https://i.ibb.co/r2Cz58B3/IMG-20251206-WA0033.jpg" alt="Cake decorado 28" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 29">
+                    <img src="https://i.ibb.co/mQc2DKw/IMG-20251206-WA0034.jpg" alt="Cake decorado 29" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 30">
+                    <img src="https://i.ibb.co/TDxwZ9bC/IMG-20251206-WA0035.jpg" alt="Cake decorado 30" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 31">
+                    <img src="https://i.ibb.co/HpHwmFyT/IMG-20251206-WA0036.jpg" alt="Cake decorado 31" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 32">
+                    <img src="https://i.ibb.co/nNDNh3fr/IMG-20251206-WA0037.jpg" alt="Cake decorado 32" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 33">
+                    <img src="https://i.ibb.co/tT7djGtB/IMG-20251206-WA0038.jpg" alt="Cake decorado 33" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 34">
+                    <img src="https://i.ibb.co/bRd2nhww/IMG-20251206-WA0039.jpg" alt="Cake decorado 34" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 35">
+                    <img src="https://i.ibb.co/PG3dhHPY/IMG-20251206-WA0040.jpg" alt="Cake decorado 35" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 36">
+                    <img src="https://i.ibb.co/SX9MYp4w/IMG-20251206-WA0041.jpg" alt="Cake decorado 36" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 37">
+                    <img src="https://i.ibb.co/PskKrGHD/IMG-20251206-WA0042.jpg" alt="Cake decorado 37" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 38">
+                    <img src="https://i.ibb.co/35zzFyL4/IMG-20251206-WA0043.jpg" alt="Cake decorado 38" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 39">
+                    <img src="https://i.ibb.co/C5fghsh6/IMG-20251206-WA0044.jpg" alt="Cake decorado 39" loading="lazy">
+                </div>
+                <div class="gallery-item" onclick="openModal(this)" tabindex="0" role="button" aria-label="Ver cake decorado 40">
+                    <img src="https://i.ibb.co/SwQTqRht/IMG-20251206-WA0045.jpg" alt="Cake decorado 40" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para imagen ampliada -->
+    <div id="imageModal" class="modal" role="dialog" aria-label="Vista ampliada de imagen">
+        <button class="close-modal" onclick="closeModal()" aria-label="Cerrar vista ampliada">×</button>
+        <img class="modal-content" id="modalImage" alt="Imagen ampliada">
+    </div>
+
+    <section class="price-list" id="precios">
+        <div class="container">
+            <h2 class="section-title">LISTA DE PRECIOS</h2>
+            
+            <div class="category">
+                <h3>CAKES POR TAMAÑO (REDONDOS):</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake de 15 cm</span>
+                            <span class="item-price">1,500 CUP</span>
+                        </div>
+                        <p class="item-description">Perfecto para pequeñas reuniones</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake de 22 cm</span>
+                            <span class="item-price">3,500 CUP</span>
+                        </div>
+                        <p class="item-description">Ideal para festejos familiares</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake de 24 cm</span>
+                            <span class="item-price">4,500 CUP</span>
+                        </div>
+                        <p class="item-description">Para celebraciones más grandes</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake de 24 cm temático</span>
+                            <span class="item-price">5,000 CUP</span>
+                        </div>
+                        <p class="item-description">Decoración personalizada</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake "Blancanieves"</span>
+                            <span class="item-price">5,000 CUP</span>
+                        </div>
+                        <p class="item-description">Temático de princesas</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake de un piso alto</span>
+                            <span class="item-price">9,000 CUP</span>
+                        </div>
+                        <p class="item-description">Impactante y elegante</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <h3>CAKES POR PISOS Y ESTRUCTURAS:</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes de 2 pisos</span>
+                            <span class="item-price">12,500 CUP</span>
+                        </div>
+                        <div class="sub-item">
+                            <div class="item-header">
+                                <span class="item-name">Más grande</span>
+                                <span class="item-price">15,500 CUP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes de 2 pisos (base rectangular y arriba redondo)</span>
+                            <span class="item-price">12,500 CUP</span>
+                        </div>
+                        <div class="sub-item">
+                            <div class="item-header">
+                                <span class="item-name">Más grande</span>
+                                <span class="item-price">16,000 CUP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes de 3 pisos</span>
+                            <span class="item-price">25,000 CUP</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes de estructuras</span>
+                            <span class="item-price">25,000 CUP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <h3>CAKES POR FORMA ESPECIAL:</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake en forma de 8</span>
+                            <span class="item-price">9,000 CUP</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cake en forma de libro (rectangular)</span>
+                            <span class="item-price">13,000 CUP</span>
+                        </div>
+                        <div class="sub-item">
+                            <div class="item-header">
+                                <span class="item-name">Más grande</span>
+                                <span class="item-price">16,000 CUP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <h3>CAKES RECTANGULARES TEMÁTICOS:</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes temáticos rectangulares</span>
+                            <span class="item-price">12,500 CUP</span>
+                        </div>
+                        <div class="sub-item">
+                            <div class="item-header">
+                                <span class="item-name">Más grande</span>
+                                <span class="item-price">15,500 CUP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cakes temáticos infantiles</span>
+                            <span class="item-price">12,500 CUP</span>
+                        </div>
+                        <div class="sub-item">
+                            <div class="item-header">
+                                <span class="item-name">Más grandes</span>
+                                <span class="item-price">15,500 CUP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category">
+                <h3>OTROS POSTRES:</h3>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Miniroscas</span>
+                            <span class="item-price">50 CUP</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Magdalenas</span>
+                            <span class="item-price">50 CUP</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header">
+                            <span class="item-name">Cupcakes temáticos</span>
+                            <span class="item-price">150 CUP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-system" id="pedidos">
+        <div class="container">
+            <h2 class="section-title">Sistema de Pedidos</h2>
+            <div class="order-form">
+                <form id="orderForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nombre completo *</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deliveryDate">Para que día desea el pastel: *</label>
+                        <input type="date" id="deliveryDate" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="childName">Nombre del niño o niña:</label>
+                            <input type="text" id="childName">
+                        </div>
+                        <div class="form-group">
+                            <label for="childAge">Edad:</label>
+                            <input type="number" id="childAge" min="0" max="18">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="panetelaFlavor">Si desea las panetelas de chocolate o vainilla:</label>
+                        <select id="panetelaFlavor">
+                            <option value="">Seleccionar sabor</option>
+                            <option value="Chocolate">Chocolate</option>
+                            <option value="Vainilla">Vainilla</option>
+                            <option value="Ambos">Ambos</option>
+                            <option value="No desea">No desea</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deliveryTime">A que hora lo necesita:</label>
+                        <input type="time" id="deliveryTime">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cupcakes">Si quiere cupcakes temáticos cuantos:</label>
+                            <input type="number" id="cupcakes" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="miniroscas">Si desea miniroscas cuantas:</label>
+                            <input type="number" id="miniroscas" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="magdalenas">Si desea magdalenas cuantas:</label>
+                            <input type="number" id="magdalenas" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="pinata">Si desea piñata temática y personalizada:</label>
+                            <select id="pinata">
+                                <option value="">Seleccionar</option>
+                                <option value="Sí">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cakeType">Seleccionar tipo de cake *</label>
+                        <div style="display: flex;">
+                            <select id="cakeType" required style="flex: 1;">
+                                <option value="">Seleccione un cake</option>
+                                <optgroup label="Cakes por tamaño">
+                                    <option value="Cake de 15 cm: 1,500 CUP">Cake de 15 cm - 1,500 CUP</option>
+                                    <option value="Cake de 22 cm: 3,500 CUP">Cake de 22 cm - 3,500 CUP</option>
+                                    <option value="Cake de 24 cm: 4,500 CUP">Cake de 24 cm - 4,500 CUP</option>
+                                    <option value="Cake de 24 cm temático: 5,000 CUP">Cake de 24 cm temático - 5,000 CUP</option>
+                                    <option value="Cake 'Blancanieves': 5,000 CUP">Cake "Blancanieves" - 5,000 CUP</option>
+                                    <option value="Cake de un piso alto: 9,000 CUP">Cake de un piso alto - 9,000 CUP</option>
+                                </optgroup>
+                                <optgroup label="Cakes especiales">
+                                    <option value="Cake en forma de 8: 9,000 CUP">Cake en forma de 8 - 9,000 CUP</option>
+                                    <option value="Cake en forma de libro: 13,000 CUP">Cake en forma de libro - 13,000 CUP</option>
+                                </optgroup>
+                            </select>
+                            <button type="button" class="btn btn-add" id="addItem">Añadir</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Productos seleccionados:</label>
+                        <div class="selected-items" id="selectedItems">
+                            <p>No hay productos seleccionados aún.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialInstructions">Instrucciones especiales</label>
+                        <textarea id="specialInstructions" rows="3" placeholder="Detalles de decoración, sabores, alergias, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn">Enviar Pedido por WhatsApp</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="location" id="ubicacion">
+        <div class="container">
+            <h2 class="section-title">Ubicación</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Visítanos</h3>
+                    <div class="address">
+                        <div>
+                            <p style="font-weight: 600; margin-bottom: 5px;">Dulcería Lisset</p>
+                            <p>28num 974 entre ave 26 y 47 plaza</p>
+                            <p>Cuba</p>
+                        </div>
+                    </div>
+                    <p>Estamos ubicados en un lugar céntrico y de fácil acceso.</p>
+                    <p style="margin-top: 10px;"><strong>Teléfono:</strong> <a href="tel:+5352633440" class="phone-link">+53 52633440</a></p>
+                    <p><strong>Horario:</strong> Lunes a Sábado de 8:00 AM a 6:00 PM</p>
+                </div>
+                <div class="map-placeholder">
+                    <p style="font-weight: 600; margin-bottom: 8px;">Mapa de ubicación</p>
+                    <p>28num 974 entre ave 26 y 47 plaza</p>
+                    <p style="margin-top: 8px; color: #3498db;">📞 +53 52633440</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addItemBtn = document.getElementById('addItem');
+            const cakeTypeSelect = document.getElementById('cakeType');
+            const selectedItemsContainer = document.getElementById('selectedItems');
+            const orderForm = document.getElementById('orderForm');
+            let selectedItems = [];
+            
+            // Configurar fecha mínima para entrega (mañana)
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('deliveryDate').setAttribute('min', minDate);
+            
+            // Agregar cake a la lista
+            addItemBtn.addEventListener('click', function() {
+                if (cakeTypeSelect.value) {
+                    const productValue = cakeTypeSelect.value;
+                    const parts = productValue.split(':');
+                    const name = parts[0];
+                    const price = parts[1].trim();
+                    
+                    selectedItems.push({name: name, price: price});
+                    updateSelectedItemsList();
+                    cakeTypeSelect.selectedIndex = 0;
+                }
+            });
+            
+            // Actualizar lista de productos seleccionados
+            function updateSelectedItemsList() {
+                if (selectedItems.length === 0) {
+                    selectedItemsContainer.innerHTML = '<p>No hay productos seleccionados aún.</p>';
+                    return;
+                }
+                
+                let html = '';
+                let total = 0;
+                
+                selectedItems.forEach((item, index) => {
+                    const priceValue = parseInt(item.price.replace(' CUP', '').replace(',', ''));
+                    total += priceValue;
+                    
+                    html += `
+                        <div class="selected-item">
+                            <span>${item.name}</span>
+                            <span>${item.price}</span>
+                            <button type="button" class="btn-remove" data-index="${index}" title="Eliminar">
+                                ×
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <div class="selected-item" style="font-weight: bold; border-top: 2px solid #3498db; margin-top: 8px; padding-top: 8px;">
+                        <span>TOTAL</span>
+                        <span>${total.toLocaleString('es-CU')} CUP</span>
+                        <span></span>
+                    </div>
+                `;
+                
+                selectedItemsContainer.innerHTML = html;
+                
+                // Agregar eventos a botones de eliminar
+                document.querySelectorAll('.btn-remove').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        selectedItems.splice(index, 1);
+                        updateSelectedItemsList();
+                    });
+                });
+            }
+            
+            // Enviar pedido por WhatsApp
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (selectedItems.length === 0) {
+                    alert('Por favor, seleccione al menos un cake para su pedido.');
+                    return;
+                }
+                
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const deliveryDate = document.getElementById('deliveryDate').value;
+                const childName = document.getElementById('childName').value.trim();
+                const childAge = document.getElementById('childAge').value;
+                const panetelaFlavor = document.getElementById('panetelaFlavor').value;
+                const deliveryTime = document.getElementById('deliveryTime').value;
+                const cupcakes = document.getElementById('cupcakes').value;
+                const miniroscas = document.getElementById('miniroscas').value;
+                const magdalenas = document.getElementById('magdalenas').value;
+                const pinata = document.getElementById('pinata').value;
+                const specialInstructions = document.getElementById('specialInstructions').value.trim();
+                
+                // Calcular total
+                let total = 0;
+                let productList = '';
+                
+                selectedItems.forEach(item => {
+                    const priceValue = parseInt(item.price.replace(' CUP', '').replace(',', ''));
+                    total += priceValue;
+                    productList += `• ${item.name}: ${item.price}\n`;
+                });
+                
+                // Calcular extras
+                let extrasTotal = 0;
+                let extrasList = '';
+                
+                if (cupcakes > 0) {
+                    const cupcakesPrice = cupcakes * 150;
+                    extrasTotal += cupcakesPrice;
+                    extrasList += `• Cupcakes temáticos (${cupcakes}): ${cupcakesPrice} CUP\n`;
+                }
+                
+                if (miniroscas > 0) {
+                    const miniroscasPrice = miniroscas * 50;
+                    extrasTotal += miniroscasPrice;
+                    extrasList += `• Miniroscas (${miniroscas}): ${miniroscasPrice} CUP\n`;
+                }
+                
+                if (magdalenas > 0) {
+                    const magdalenasPrice = magdalenas * 50;
+                    extrasTotal += magdalenasPrice;
+                    extrasList += `• Magdalenas (${magdalenas}): ${magdalenasPrice} CUP\n`;
+                }
+                
+                total += extrasTotal;
+                
+                // Crear mensaje para WhatsApp
+                const message = `*NUEVO PEDIDO - DULCERÍA LISSET*%0A%0A` +
+                               `*Cliente:* ${name}%0A` +
+                               `*Teléfono:* ${phone}%0A` +
+                               `*Fecha de entrega:* ${deliveryDate}%0A` +
+                               `*Hora de entrega:* ${deliveryTime || 'No especificada'}%0A%0A` +
+                               `*Información del festejado:*%0A` +
+                               `Nombre: ${childName || 'No especificado'}%0A` +
+                               `Edad: ${childAge || 'No especificada'}%0A%0A` +
+                               `*Cakes seleccionados:*%0A${productList}%0A` +
+                               `*Extras:*%0A${extrasList || 'Ninguno'}%0A` +
+                               `*Panetelas:* ${panetelaFlavor || 'No especificado'}%0A` +
+                               `*Piñata temática:* ${pinata || 'No especificado'}%0A%0A` +
+                               `*Total:* ${total.toLocaleString('es-CU')} CUP%0A%0A` +
+                               `*Instrucciones especiales:*%0A${specialInstructions || 'Ninguna'}`;
+                
+                // Número de WhatsApp
+                const whatsappNumber = '+5352633440';
+                
+                // Crear URL de WhatsApp
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+                
+                // Abrir WhatsApp en nueva pestaña
+                window.open(whatsappUrl, '_blank');
+                
+                // Limpiar formulario
+                orderForm.reset();
+                selectedItems = [];
+                updateSelectedItemsList();
+                
+                // Mostrar confirmación
+                alert('Será redirigido a WhatsApp para completar su pedido.');
+            });
+            
+            // Mejoras de accesibilidad para galería
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        openModal(this);
+                    }
+                });
+            });
+        });
+        
+        // Funciones para el modal de imágenes
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = element.querySelector('img').src;
+            modalImg.alt = element.querySelector('img').alt + ' (vista ampliada)';
+            document.querySelector('.close-modal').focus();
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            // Enfocar el primer elemento de la galería al cerrar
+            document.querySelector('.gallery-item').focus();
+        }
+        
+        // Cerrar modal al hacer clic fuera de la imagen
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
